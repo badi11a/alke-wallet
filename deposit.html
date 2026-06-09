@@ -12,15 +12,15 @@
         <h2>Depositar Dinero</h2>
         <hr>
 
-        <div id="alertMensaje" class="alert" hidden></div>
+        <div id="alertMensaje" class="alert alert-success" hidden></div>
 
-        <form id="depositForm">
+        <div id="depositBox">
             <div class="form-group">
                 <label>Monto a depositar:</label>
-                <input type="number" class="form-control" id="inputDeposito" min="1" required>
+                <input type="number" class="form-control" id="inputDeposito">
             </div>
-            <button type="submit" class="btn btn-success">Realizar depósito</button>
-        </form>
+            <button type="button" id="btnDepositar" class="btn btn-success">Realizar depósito</button>
+        </div>
         
         <br>
         <a href="menu.html" class="btn btn-link">Volver al Menú</a>
@@ -28,22 +28,20 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            var saldoActual = Number(localStorage.getItem('walletSaldo')) || 0;
+        var saldoActual = Number(localStorage.getItem('walletSaldo')) || 0;
 
-            $('#depositForm').submit(function(evento) {
-                evento.preventDefault();
-                var monto = Number($('#inputDeposito').val());
+        $('#btnDepositar').click(function() {
+            var monto = Number($('#inputDeposito').val());
 
+            if (monto > 0) {
                 saldoActual = saldoActual + monto;
                 localStorage.setItem('walletSaldo', saldoActual);
                 
-                $('#alertMensaje').removeClass('alert-danger').addClass('alert-success')
-                                  .text('¡Depósito exitoso! Nuevo saldo: $' + saldoActual)
-                                  .removeAttr('hidden'); 
-                
+                $('#alertMensaje').text('¡Depósito exitoso! Nuevo saldo: $' + saldoActual).removeAttr('hidden'); 
                 $('#inputDeposito').val('');
-            });
+            } else {
+                alert('Por favor, ingresa un monto válido.');
+            }
         });
     </script>
 </body>

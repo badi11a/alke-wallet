@@ -19,19 +19,17 @@
         <a href="sendmoney.html" class="btn btn-info btn-block mb-2">Enviar Dinero</a>
         <a href="transactions.html" class="btn btn-secondary btn-block mb-4">Últimos Movimientos</a>
         
-        <button id="btnLogout" class="btn btn-danger">Cerrar Sesión</button>
+        <button type="button" id="btnLogout" class="btn btn-danger">Cerrar Sesión</button>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            var saldo = Number(localStorage.getItem('walletSaldo')) || 0;
-            $('#saldoDisplay').text('$' + saldo);
+        var saldo = Number(localStorage.getItem('walletSaldo')) || 0;
+        $('#saldoDisplay').text('$' + saldo);
 
-            $('#btnLogout').click(function() {
-                localStorage.clear();
-                window.location.href = "login.html";
-            });
+        $('#btnLogout').click(function() {
+            localStorage.clear();
+            window.location.href = "login.html";
         });
     </script>
 </body>
